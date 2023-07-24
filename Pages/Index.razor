@@ -1,0 +1,41 @@
+﻿@page "/"
+Welcome to your To Do App.
+
+<div class="todo-container"> 
+    <h1>To-Do List</h1>
+    <div class="todo-input"> 
+        <input type="text" @bind="toDoInput" />
+        <button @onclick="AddToDo">Add</button>
+    </div>
+
+@for(int i=0; i < todos.Count; i++)
+{
+    var index = i;
+    var todo = todos[i];
+    <div class="todo-item">
+        <div class="todo-item__text">@todo</div>
+        <div class="todo-item__close" @onclick="@(() => RemoveTodo(index))">&times;</div>
+    </div>
+}
+</div>
+
+
+
+@code
+{
+    public string toDoInput { get; set; }
+    public List<string> todos=new List<string>();
+
+    public void AddToDo()
+    {
+        todos.Add(toDoInput);
+        toDoInput="";
+    }
+
+    public void RemoveTodo(int index)
+    {
+        todos.RemoveAt(index);
+    }
+}
+
+<SurveyPrompt Title="How is Blazor working for you?" />
